@@ -1,10 +1,12 @@
 package com.example.api.infra;
 
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.api.application.IUseCase;
+
+import jakarta.validation.Valid;
 
 @RestController
 public class CalculateController {
@@ -16,12 +18,9 @@ public class CalculateController {
     }
 	
 	@GetMapping("/calculate")
-    public int calculate(
-            @RequestParam int x,
-            @RequestParam int y,
-            @RequestParam int n) {
+    public int calculate(@Valid @ModelAttribute CalculateRequestDTO request) {
 		
-		return useCase.ejecutar(x, y, n);
+		return useCase.ejecutar(request.getX(), request.getY(), request.getN());
 		
     }
 

@@ -100,4 +100,24 @@ public class CalculateControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().string("999999998"));
     }
+    
+    @Test
+    void testValidation_xMenorQue2() throws Exception {
+        // x = 1 (debe fallar porque x < 2)
+        mockMvc.perform(get("/calculate")
+                .param("x", "1")
+                .param("y", "0")
+                .param("n", "10"))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void testValidation_yNoMenorQuex() throws Exception {
+        // y = 5, x = 5 (debe fallar porque y < x no se cumple)
+        mockMvc.perform(get("/calculate")
+                .param("x", "5")
+                .param("y", "5")
+                .param("n", "10"))
+                .andExpect(status().isBadRequest());
+    }
 }
