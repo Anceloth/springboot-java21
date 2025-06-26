@@ -39,7 +39,7 @@ La API estará disponible en:
 ### Endpoint
 
 ```
-GET /calculate?a={x}&b={y}&c={n}
+GET /calculate?x={x}&y={y}&n={n}
 ```
 
 ### Parámetros
